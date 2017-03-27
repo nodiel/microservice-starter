@@ -1,0 +1,13 @@
+const config = require('config');
+const app = require('../app');
+const db = require('../db');
+
+const databaseOptions = config.get('database');
+const port = config.get('server.port');
+
+db.createConnection(databaseOptions)
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Server listening on port ${port}`);
+    });
+  });
